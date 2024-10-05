@@ -1,4 +1,6 @@
+/// Implemented by ``ConstEval<true>``.
 pub trait IsTrue {}
+/// Implemented by ``ConstEval<false>``.
 pub trait IsFalse {}
 
 /// Implements ``IsTrue`` for ``ConstEval<true>``, and ``IsFalse`` for ``ConstEval<false>``.
