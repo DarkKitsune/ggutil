@@ -1,7 +1,8 @@
 pub mod handle_map;
-pub mod unique;
 pub mod maybe_owned;
+pub mod misc;
 pub mod prelude;
+pub mod unique;
 
 #[cfg(test)]
 mod tests {
@@ -46,7 +47,7 @@ mod tests {
         let b = MaybeOwned::Borrowed(a.as_ref());
         // Unwrap the value
         assert_eq!(b.unwrap(), None);
-        
+
         // Create a new MaybeOwned containing mutable reference to `a`
         let mut c: MaybeOwned<i32> = a.as_mut().unwrap().into();
         // Unwrap a clone of the value
@@ -55,5 +56,17 @@ mod tests {
         *c.as_mut().unwrap() = 3;
         // Make sure a is now 3
         assert_eq!(a.unwrap(), Some(3));
+    }
+
+    #[test]
+    fn const_eval() {
+        fn worked()
+        where
+            ConstEval<{ 15 > 5 }>: IsTrue,
+            ConstEval<{ 5.0 < 2.0 }>: IsFalse,
+        {
+        }
+
+        worked();
     }
 }

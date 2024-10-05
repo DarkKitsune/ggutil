@@ -1,4 +1,7 @@
-use std::{fmt::Debug, hash::{Hash, Hasher}};
+use std::{
+    fmt::Debug,
+    hash::{Hash, Hasher},
+};
 
 /// A value that is either owned or borrowed.
 pub enum MaybeOwned<'a, T: 'a> {
@@ -33,7 +36,8 @@ impl<'a, T: 'a> MaybeOwned<'a, T> {
 
     /// Unwraps and returns the inner value. If the value is borrowed, it is cloned.
     pub fn unwrap_or_clone(self) -> T
-    where T: Clone,
+    where
+        T: Clone,
     {
         match self {
             MaybeOwned::Owned(value) => value,
@@ -44,7 +48,8 @@ impl<'a, T: 'a> MaybeOwned<'a, T> {
 
     /// Forces the value to be owned. Clones the value if it is borrowed.
     pub fn take_ownership(&mut self)
-        where T: Clone,
+    where
+        T: Clone,
     {
         match self {
             MaybeOwned::Owned(_) => {}
