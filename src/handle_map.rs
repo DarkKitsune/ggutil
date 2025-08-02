@@ -104,14 +104,14 @@ impl<T> HandleMap<T> {
     }
 
     /// Gets an iterator over the values in the map.
-    pub fn values(&self) -> HandleMapValues<T> {
+    pub fn values(&'_ self) -> HandleMapValues<'_, T> {
         HandleMapValues {
             values: self.values.iter(),
         }
     }
 
     /// Gets an iterator over mutable references to the values in the map.
-    pub fn values_mut(&mut self) -> HandleMapValuesMut<T> {
+    pub fn values_mut(&'_ mut self) -> HandleMapValuesMut<'_, T> {
         HandleMapValuesMut {
             values: self.values.iter_mut(),
         }

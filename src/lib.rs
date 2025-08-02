@@ -1,3 +1,6 @@
+#![allow(incomplete_features)]
+#![feature(generic_const_exprs)]
+
 pub mod handle_map;
 pub mod maybe_owned;
 pub mod misc;
@@ -68,5 +71,11 @@ mod tests {
         }
 
         worked();
+    }
+
+    #[test]
+    fn const_nonzero() {
+        const NONZERO: std::num::NonZeroUsize = nonzero_usize::<1>();
+        assert_eq!(NONZERO.get(), 1);
     }
 }
